@@ -1,19 +1,28 @@
-import express from 'express';
+'use strict';
 
-const app = express();
-app.use(express.json());
+import Hapi from '@hapi/hapi';
 
-const PORT = process.env.PORT || 3000;
+const init = async () => {
+	const server = Hapi.server({
+		port: 3000,
+		host: '0.0.0.0'
+	});
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+	server.route({
+		method: 'GET',
+		path: '/',
+		handler: (request, h) => {
+			return 'Hello World!';
+		}
+	});
+
+	await server.start();
+	console.log(`Server running on ${server.info.uri}`);
+};
+
+process.on('unhandledRejection', (err) => {
+	console.log(err);
+	process.exit(1);
 });
 
-app.get('/nama', (req, res) => {
-  const nama = req.query.nama || 'Guest';
-  res.send(`Halo, ${nama}!`);
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+init();
