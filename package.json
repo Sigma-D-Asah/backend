@@ -14,7 +14,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@hapi/hapi": "^21.4.3",
-    "express": "^5.1.0"
+    "@hapi/hapi": "^21.4.3"
   }
 }
