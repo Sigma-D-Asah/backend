@@ -33,3 +33,6 @@ coverage
 # Finder (MacOS) folder config
 *.DS_Store
 *__MACOSX
+*.github
+*accenture.jpeg
+machine-learning/model/
