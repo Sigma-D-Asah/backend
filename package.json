@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --watch src --exec tsx src/app.ts",
+    "bun:build": "bun build ./src/app.ts --outdir ./dist",
+    "bun:start": "bun run src/app.ts",
+    "start": "tsx src/app.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.5",
+    "@types/http-errors": "^2.0.5",
+    "@types/node": "^24.10.1",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "drizzle-kit": "^0.31.7",
+    "mastra": "^0.18.6",
+    "tsx": "^4.20.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^2.0.74",
+    "@dotenvx/dotenvx": "^1.51.1",
+    "@mastra/core": "^0.24.6",
+    "@neondatabase/serverless": "^1.0.2",
+    "@scalar/express-api-reference": "^0.8.25",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.44.7",
+    "express": "^5.1.0",
+    "express-validator": "^7.3.1",
+    "nodemon": "^3.1.11",
+    "zod": "^4.1.13"
+  }
+}

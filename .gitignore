@@ -1,5 +1,5 @@
 # dependencies (bun install)
-node_modules
+*node_modules
 
 # output
 out
@@ -11,28 +11,31 @@ coverage
 *.lcov
 
 # logs
-*logs
-*_.log
-*report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+logs
+_.log
+report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # dotenv environment variable files
-*.env
-*.env.development.local
-*.env.test.local
-*.env.production.local
-*.env.local
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 # caches
-*.eslintcache
-*.cache
+.eslintcache
+.cache
 *.tsbuildinfo
 
 # IntelliJ based IDEs
-*.idea
+.idea
 
 # Finder (MacOS) folder config
 *.DS_Store
-*__MACOSX
-*.github
-*accenture.jpeg
-machine-learning/model/
+*__MACOSX__
+
+# Drizzle ORM migrations
+src/models/migrations
+
+# Github
+.github

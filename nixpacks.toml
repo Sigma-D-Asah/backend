@@ -1,0 +1,16 @@
+[variables]
+NIXPACKS_NODE_VERSION = "22"
+NPM_CONFIG_PRODUCTION = "false"
+
+[phases.setup]
+nixPkgs = ["nodejs_22", "bun"]
+onlyIncludeFiles = ["package.json", "bun.lock"]
+
+[phases.install]
+cmd = "bun install --frozen-lockfile"
+
+[phases.build]
+cmd = "bun run bun:build"
+
+[phases.start]
+cmd = "bun run bun:start"
