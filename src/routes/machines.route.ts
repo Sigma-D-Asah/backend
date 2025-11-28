@@ -40,7 +40,7 @@ import { getAllMachines, createMachine, getMachineById, updateMachineData } from
  *           type: string
  *         status:
  *           type: string
- * /machines:
+ * /api/v1/machines:
  *   get:
  *     tags:
  *       - Machines
@@ -86,7 +86,7 @@ import { getAllMachines, createMachine, getMachineById, updateMachineData } from
  *       500:
  *         description: Terjadi kesalahan server
  *
- * /machines/{id}:
+ * /api/v1/machines/{id}:
  *   get:
  *     tags:
  *       - Machines
