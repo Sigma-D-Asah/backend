@@ -39,3 +39,6 @@ src/models/migrations
 
 # Github
 .github
+
+# Mastra build files
+.mastra

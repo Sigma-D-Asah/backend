@@ -1,22 +1,10 @@
-import { pgTable, unique, check, uuid, varchar, char, jsonb, timestamp, index, foreignKey, doublePrecision, integer, boolean, text, serial } from "drizzle-orm/pg-core"
+import { pgTable, index, foreignKey, uuid, doublePrecision, integer, boolean, timestamp, unique, varchar, jsonb, text, check, serial, char } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
-export const machines = pgTable("machines", {
-	machineId: uuid("machine_id").defaultRandom().primaryKey().notNull(),
-	code: varchar({ length: 50 }).notNull(),
-	name: varchar({ length: 100 }).notNull(),
-	type: char({ length: 1 }).notNull(),
-	location: varchar({ length: 100 }).default('Factory Floor 1'),
-	status: varchar({ length: 20 }).default('ACTIVE'),
-	metadata: jsonb().default({}),
-	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
-}, (table) => [
-	unique("machines_code_key").on(table.code),
-	check("machines_status_check", sql`(status)::text = ANY ((ARRAY['ACTIVE'::character varying, 'MAINTENANCE'::character varying, 'DECOMMISSIONED'::character varying])::text[])`),
-]);
+
 
 export const sensorReadings = pgTable("sensor_readings", {
-	readingId: uuid("reading_id").defaultRandom().primaryKey().notNull(),
+	readingId: uuid("reading_id").default(sql`uuid_generate_v7()`).primaryKey().notNull(),
 	machineId: uuid("machine_id").notNull(),
 	airTemperatureK: doublePrecision("air_temperature_k").notNull(),
 	processTemperatureK: doublePrecision("process_temperature_k").notNull(),
@@ -37,7 +25,7 @@ export const sensorReadings = pgTable("sensor_readings", {
 ]);
 
 export const aiPredictions = pgTable("ai_predictions", {
-	predictionId: uuid("prediction_id").defaultRandom().primaryKey().notNull(),
+	predictionId: uuid("prediction_id").default(sql`uuid_generate_v7()`).primaryKey().notNull(),
 	readingId: uuid("reading_id").notNull(),
 	machineId: uuid("machine_id").notNull(),
 	isFailure: boolean("is_failure").notNull(),
@@ -62,7 +50,7 @@ export const aiPredictions = pgTable("ai_predictions", {
 ]);
 
 export const maintenanceTickets = pgTable("maintenance_tickets", {
-	ticketId: uuid("ticket_id").defaultRandom().primaryKey().notNull(),
+	ticketId: uuid("ticket_id").default(sql`uuid_generate_v7()`).primaryKey().notNull(),
 	machineId: uuid("machine_id").notNull(),
 	predictionId: uuid("prediction_id"),
 	ticketNumber: serial("ticket_number").notNull(),
@@ -87,4 +75,18 @@ export const maintenanceTickets = pgTable("maintenance_tickets", {
 		}),
 	check("maintenance_tickets_priority_check", sql`(priority)::text = ANY ((ARRAY['LOW'::character varying, 'MEDIUM'::character varying, 'HIGH'::character varying, 'CRITICAL'::character varying])::text[])`),
 	check("maintenance_tickets_status_check", sql`(status)::text = ANY ((ARRAY['OPEN'::character varying, 'ASSIGNED'::character varying, 'IN_PROGRESS'::character varying, 'RESOLVED'::character varying, 'CLOSED'::character varying])::text[])`),
+]);
+
+export const machines = pgTable("machines", {
+	machineId: uuid("machine_id").default(sql`uuid_generate_v7()`).primaryKey().notNull(),
+	code: varchar({ length: 50 }).notNull(),
+	name: varchar({ length: 100 }).notNull(),
+	type: char({ length: 1 }).notNull(),
+	location: varchar({ length: 100 }).default('Factory Floor 1'),
+	status: varchar({ length: 20 }).default('ACTIVE'),
+	metadata: jsonb().default({}),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
+}, (table) => [
+	unique("machines_code_key").on(table.code),
+	check("machines_status_check", sql`(status)::text = ANY ((ARRAY['ACTIVE'::character varying, 'MAINTENANCE'::character varying, 'DECOMMISSIONED'::character varying])::text[])`),
 ]);

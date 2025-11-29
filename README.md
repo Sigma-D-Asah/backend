@@ -1,4 +1,4 @@
-# Asah — Predictive Maintenance API (Backend)
+# Sigma-D REST API
 
 ## Struktur Proyek
 ```
@@ -35,10 +35,14 @@ backend/
 ```
 
 Keterangan singkat:
-- File `app.ts` adalah entry point; definisi route, middleware, dan swagger ada di sini.
-- `controllers` menangani Http request/response, `services` berisi logic database untuk operasional.
-- `config` memuat konfigurasi & Swagger/OpenAPI config.
+- `app.ts` adalah entry point; pemanggilan fungsi route, middleware, dan dokumentasi Swagger/OpenAPI ada di sini.
+- `controllers` menangani HTTP request/response
+- `services` berisi logic database untuk operasional.
+- `config` memuat konfigurasi & dokumentasi Swagger/OpenAPI.
 - `models` termasuk Drizzle schema & relasi.
+- `middleware` menangani middleware.
+- `utils` berisi utility tambahan.
+- `mastra` berisi konfiguraso untuk agentic dan tools AI dengan Mastra.
 
 
 ## Instalasi & Reproduksi
@@ -84,3 +88,4 @@ Rekomendasi: Install [Bun](https://bun.sh/) dulu.
 ## Endpoints utama (docs & API)
 - Base URL: `http://<HOST>:<PORT>/api/v1` — default: `http://127.0.0.1:3000/api/v1`
 - OpenAPI Dokumentasi: `http://127.0.0.1:3000/docs`
+- Mastra Studio: `http://127.0.0.1:8000` dengan menjalankan `npm run mastra:dev` atau `bun run mastra:dev`

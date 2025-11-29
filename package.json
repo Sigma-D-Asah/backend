@@ -7,7 +7,8 @@
     "dev": "nodemon --watch src --exec tsx src/app.ts",
     "bun:build": "bun build ./src/app.ts --outdir ./dist",
     "bun:start": "bun run src/app.ts",
-    "start": "tsx src/app.ts"
+    "start": "tsx src/app.ts",
+    "mastra:dev": "mastra dev"
   },
   "devDependencies": {
     "@types/bun": "latest",
