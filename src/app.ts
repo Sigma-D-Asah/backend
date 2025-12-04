@@ -12,6 +12,7 @@ import { appConfig } from './config/index';
 
 // Import Routes
 import { machinesRouter } from './routes/machines.route';
+import { ticketsRouter } from './routes/tickets.route';
 
 const app = express();
 
@@ -24,6 +25,7 @@ const prefix = '/api/v1';
 
 // Service Routes
 app.use(prefix, machinesRouter);
+app.use(prefix, ticketsRouter);
 
 // OpenAPI Routes
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
