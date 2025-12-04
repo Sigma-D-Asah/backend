@@ -1,12 +1,5 @@
 import { Router } from "express";
-import {
-    getAllTickets,
-    getTicketById,
-    createTicket,
-    updateTicket,
-} from "../controllers/tickets.controller";
-
-const router = Router();
+import { getAllTickets, getTicketById, createTicket, updateTicket } from "../controllers/tickets.controller";
 
 /**
  * @openapi
@@ -101,9 +94,11 @@ const router = Router();
  *         description: Terjadi kesalahan server
  */
 
-router.get("/tickets", getAllTickets);
-router.get("/tickets/:id", getTicketById);
-router.post("/tickets", createTicket);
-router.put("/tickets/:id", updateTicket);
+const routerObject = Router();
 
-export default router;
+routerObject.get("/tickets", getAllTickets);
+routerObject.get("/tickets/:id", getTicketById);
+routerObject.post("/tickets", createTicket);
+routerObject.put("/tickets/:id", updateTicket);
+
+export const ticketsRouter = routerObject;
