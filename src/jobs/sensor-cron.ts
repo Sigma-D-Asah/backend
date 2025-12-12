@@ -80,9 +80,9 @@ export async function generateSensorDataForAllMachines() {
 }
 /**
  * Start cron job to generate sensor data at regular intervals
- * @param intervalHours - How often to generate data (in hours). Default: 1 hour (24x per day)
+ * @param intervalHours - How often to generate data (in hours). Default: 3 hours (8x per day)
  */
-export function startSensorDataCronJob(intervalHours: number = 1) {
+export function startSensorDataCronJob(intervalHours: number = 3) {
     console.log(`Starting sensor data cron job (interval: ${intervalHours} hours)`);
     
     // Run immediately on start

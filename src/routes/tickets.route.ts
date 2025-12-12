@@ -8,7 +8,7 @@ import { getAllTickets, getTicketById, createTicket, updateTicket } from "../con
  *     tags:
  *       - Tickets
  *     summary: Ambil semua tiket
- *     description: Mengambil seluruh daftar tiket maintenance dari database.
+ *     description: Mengambil seluruh daftar Maintenance Ticketing dari database.
  *     responses:
  *       200:
  *         description: Daftar tiket berhasil diambil
