@@ -1,10 +1,51 @@
 import { db } from "../models/db";
 import { maintenanceTickets } from "../models/schema";
-import { eq } from "drizzle-orm";
+import { eq, desc, lt, and } from "drizzle-orm";
 
-// GET all tickets
-export async function getAllTicketsService() {
-    return await db.select().from(maintenanceTickets);
+interface PaginationParams {
+    limit?: number;
+    cursor?: string;
+}
+
+interface PaginatedResponse<T> {
+    data: T[];
+    pagination: {
+        nextCursor: string | null;
+        hasMore: boolean;
+    };
+}
+
+// OPTIMIZED: Added cursor-based pagination
+export async function getAllTicketsService(
+    params: PaginationParams = {}
+): Promise<PaginatedResponse<any>> {
+    const limit = params.limit || 50;
+    const cursor = params.cursor;
+    
+    const results = cursor
+        ? await db.select()
+            .from(maintenanceTickets)
+            .where(lt(maintenanceTickets.createdAt, cursor))
+            .orderBy(desc(maintenanceTickets.createdAt))
+            .limit(limit + 1)
+        : await db.select()
+            .from(maintenanceTickets)
+            .orderBy(desc(maintenanceTickets.createdAt))
+            .limit(limit + 1);
+    
+    const hasMore = results.length > limit;
+    const data = hasMore ? results.slice(0, limit) : results;
+    const nextCursor = hasMore && data.length > 0
+        ? data[data.length - 1]?.createdAt ?? null
+        : null;
+    
+    return {
+        data,
+        pagination: {
+            nextCursor,
+            hasMore
+        }
+    };
 }
 
 // GET ticket by ID

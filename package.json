@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch src --exec tsx src/app.ts",
     "bun:build": "bun build ./src/app.ts --outdir ./dist",
+    "bun:dev": "bun run --hot src/app.ts",
     "bun:start": "bun run src/app.ts",
     "start": "tsx src/app.ts",
     "mastra:dev": "mastra dev"
@@ -31,10 +32,12 @@
     "@mastra/core": "^0.24.6",
     "@neondatabase/serverless": "^1.0.2",
     "@scalar/express-api-reference": "^0.8.25",
+    "@types/node-cron": "^3.0.11",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.7",
     "express": "^5.1.0",
     "express-validator": "^7.3.1",
+    "node-cron": "^4.2.1",
     "nodemon": "^3.1.11",
     "zod": "^4.1.13"
   }

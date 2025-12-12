@@ -12,8 +12,16 @@ import {
 
 export async function getAllTickets(req: Request, res: Response, next: NextFunction) {
     try {
-        const tickets = await getAllTicketsService();
-        res.status(200).json({ tickets });
+        const limit = req.query.limit ? parseInt(req.query.limit as string) : 50;
+        const cursor = req.query.cursor as string | undefined;
+        
+        const result = await getAllTicketsService({ limit, cursor });
+        
+        res.status(200).json({
+            success: true,
+            tickets: result.data,
+            pagination: result.pagination
+        });
     } catch (error) {
         next(new CustomError("Gagal mengambil semua tiket", 500));
     }
