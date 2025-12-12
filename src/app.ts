@@ -31,6 +31,7 @@ app.use(cors({
         'http://localhost:5173',
         'https://sigma-ml.raihanpk.com',
         'https://sigma-asah.vercel.app',
+        'https://sigma-asah.netlify.app',
         /\.raihanpk\.com$/  // Allow all subdomains
     ],
     credentials: true,
