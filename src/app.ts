@@ -1,4 +1,5 @@
 import express, {urlencoded, json} from 'express';
+import cors from 'cors';
 
 // Import Swagger Tools
 import swaggerJsDoc from 'swagger-jsdoc';
@@ -23,6 +24,19 @@ import { startBackgroundProcessor } from './services/processor.service';
 import { startSensorDataCronJob } from './jobs/sensor-cron';
 
 const app = express();
+
+// CORS Configuration
+app.use(cors({
+    origin: [
+        'http://localhost:5173',
+        'https://sigma-ml.raihanpk.com',
+        'https://sigma-asah.vercel.app',
+        /\.raihanpk\.com$/  // Allow all subdomains
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Konfigurasi
 app.use(urlencoded({ extended: true }));
