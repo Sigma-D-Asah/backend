@@ -14,7 +14,7 @@ const options: swaggerJSDoc.Options = {
         description: 'Development server',
       },
       {
-        url: 'https://sigma-asah.raihanpk.com',
+        url: 'https://sigma-backend.raihanpk.com',
         description: 'Production server',
       },
     ],
